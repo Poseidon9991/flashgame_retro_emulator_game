@@ -2,9 +2,9 @@
  * Reaksa Arcade catalog.
  *
  * `available: true` games ship an openly-licensed .swf in public/games/.
- * `available: false` games are the era classics the brief asks the catalog to
- * show — their cartridges are copyrighted, so the cabinet stays dark and the
- * player view explains how to light it up (drop games/<id>.swf).
+ * `available: false` games ship no cartridge — the cabinet lights itself once a
+ * matching games/<id>.swf lands in public/games/, or the visitor can insert
+ * their own .swf from the player panel (it runs locally, nothing uploads).
  * Play counts are demo data, disclosed in the footer.
  */
 
@@ -38,6 +38,29 @@ export const GAMES = [
     ],
     toggles: [],
     credit: "FlashWing (kof.flashwing.net) — freeware cartridge, v1.8 build",
+  },
+  {
+    id: "kof-vs-dnf",
+    title: "The King of Fighters vs DNF",
+    year: 2010,
+    author: "FlashWing",
+    category: "Fighting",
+    tags: ["Fighting", "Action"],
+    plays: 2748110,
+    available: true,
+    tagline:
+      "FlashWing's crossover beat-em-up — Kyo Kusanagi wakes in Gran Forest and carves through Dungeon Fighter's monster hordes.",
+    instructions:
+      "A side-scrolling brawler: clear each area of gremlins and bosses, then duel the DNF heroes themselves. The campaign supports 2-player co-op on one keyboard, and a versus mode handles duels.",
+    controls: [
+      { action: "1P move / jump", keys: ["W", "A", "S", "D"] },
+      { action: "1P attacks", keys: ["J", "K"] },
+      { action: "1P dash + specials", keys: ["L", "U", "I", "O"] },
+      { action: "2P move + attacks", keys: ["ARROWS", "NUM 1", "NUM 2"] },
+      { action: "2P dash + specials", keys: ["NUM 3", "NUM 4", "NUM 5", "NUM 6"] },
+    ],
+    toggles: [],
+    credit: "FlashWing — freeware cartridge, maintainer-supplied build",
   },
   {
     id: "super-smash-flash",
@@ -81,6 +104,166 @@ export const GAMES = [
     ],
     toggles: [],
     credit: "Crazy Jay (StickPage) — cartridge not bundled",
+  },
+  {
+    id: "fancy-pants-2",
+    title: "Fancy Pants Adventure: World 2",
+    year: 2008,
+    author: "Brad Borne",
+    category: "Classics",
+    tags: ["Classics", "Action"],
+    plays: 4520963,
+    available: false,
+    tagline:
+      "The hand-drawn platformer with the orange pants — momentum runs, loop slides, and snail-shell golf.",
+    instructions:
+      "Sprint to build momentum, slide through loops, and kick the snail shell into the hole to open each exit. Arrows run and duck; S jumps; enter doors with Up.",
+    controls: [
+      { action: "Run / duck", keys: ["ARROWS"] },
+      { action: "Jump", keys: ["S"] },
+      { action: "Enter door", keys: ["UP"] },
+    ],
+    toggles: [],
+    credit: "Brad Borne (Borne Games) — cartridge not bundled",
+  },
+  {
+    id: "age-of-war",
+    title: "Age of War",
+    year: 2007,
+    author: "Louissi",
+    category: "Classics",
+    tags: ["Classics", "Action"],
+    plays: 6934208,
+    available: false,
+    tagline:
+      "The base-defense legend — evolve from cavemen throwing rocks to future tanks, and flatten the other cave.",
+    instructions:
+      "Everything runs on the mouse: buy units and turrets, launch your special attack when the meter fills, and evolve through five ages before the enemy levels your base.",
+    controls: [
+      { action: "All actions", mouse: true },
+      { action: "Buy units + evolve", mouse: "left" },
+    ],
+    toggles: [],
+    credit: "Louissi / Max Games — cartridge not bundled",
+  },
+  {
+    id: "happy-wheels",
+    title: "Happy Wheels",
+    year: 2010,
+    author: "Jim Bonacci",
+    category: "Action",
+    tags: ["Action"],
+    plays: 9118264,
+    available: false,
+    tagline:
+      "The physics ragdoll gauntlet — wheelchair guy vs. spike pits, harpoons, and catastrophic level design.",
+    instructions:
+      "Reach the finish with as much of your rider attached as possible. Lean into ramps, bail out when it goes wrong — it will go wrong.",
+    controls: [
+      { action: "Accelerate / brake", keys: ["UP", "DOWN"] },
+      { action: "Lean", keys: ["LEFT", "RIGHT"] },
+      { action: "Primary action", keys: ["SPACE"] },
+      { action: "Eject", keys: ["Z"] },
+    ],
+    toggles: [],
+    credit: "Jim Bonacci (Total Jerkface) — cartridge not bundled",
+  },
+  {
+    id: "raze-2",
+    title: "Raze 2",
+    year: 2010,
+    author: "Sky9 Games",
+    category: "Action",
+    tags: ["Action"],
+    plays: 5316941,
+    available: false,
+    tagline:
+      "Arena-shooter campaign — Earth's last soldier vs. aliens, zombies, and robots across four campaigns.",
+    instructions:
+      "Weapon-swapping arena combat: grab better guns off spawn pads, use equipment on cooldowns, and win each match mode — deathmatch, domination, elimination.",
+    controls: [
+      { action: "Move / jump", keys: ["W", "A", "S", "D"] },
+      { action: "Aim + fire", mouse: "left" },
+      { action: "Swap weapons", keys: ["Q", "E"] },
+      { action: "Equipment", keys: ["F"] },
+    ],
+    toggles: [],
+    credit: "Addison Rodomista & Juice-Tin (Sky9) — cartridge not bundled",
+  },
+  {
+    id: "electric-man-2",
+    title: "Electric Man 2",
+    year: 2008,
+    author: "Damien Clarke",
+    category: "Fighting",
+    tags: ["Fighting"],
+    plays: 3877415,
+    available: false,
+    tagline:
+      "The stick-figure tournament with bullet-time — punch, kick, and throw in crackling slow motion.",
+    instructions:
+      "Win each bracket round. Normal attacks are instant; the slow-motion set (Q/W/E) costs battery but lands cinematic finishers. Watch the meter.",
+    controls: [
+      { action: "Move", keys: ["ARROWS"] },
+      { action: "Punch / kick / throw", keys: ["A", "S", "D"] },
+      { action: "Slow-motion attacks", keys: ["Q", "W", "E"] },
+    ],
+    toggles: [],
+    credit: "Damien Clarke — cartridge not bundled",
+  },
+  {
+    id: "bloxorz",
+    title: "Bloxorz",
+    year: 2007,
+    author: "Damien Clarke",
+    category: "Puzzle",
+    tags: ["Puzzle", "Classics"],
+    plays: 5280187,
+    available: false,
+    tagline:
+      "Roll a 2×1 block across floating platforms — one wrong tilt and you're off the edge.",
+    instructions:
+      "Tumble the block onto the square hole at the end of each level. Standing upright on a weak tile cracks it; switches and bridges complicate every route.",
+    controls: [{ action: "Roll the block", keys: ["ARROWS"] }],
+    toggles: [],
+    credit: "Damien Clarke (DX Interactive) — cartridge not bundled",
+  },
+  {
+    id: "impossible-quiz",
+    title: "The Impossible Quiz",
+    year: 2007,
+    author: "Splapp-me-do",
+    category: "Puzzle",
+    tags: ["Puzzle"],
+    plays: 7403552,
+    available: false,
+    tagline:
+      "110 questions of lateral-thinking cruelty — skips are precious, and answers are never what they seem.",
+    instructions:
+      "Read every question twice, then distrust it. Answers live in puns, invisible objects, and the fourth wall. Three lives, seven skips — spend both carefully.",
+    controls: [{ action: "Answer / interact", mouse: "left" }],
+    toggles: [],
+    credit: "Splapp-me-do — cartridge not bundled",
+  },
+  {
+    id: "learn-to-fly-2",
+    title: "Learn to Fly 2",
+    year: 2011,
+    author: "light_bringer777",
+    category: "Classics",
+    tags: ["Classics"],
+    plays: 4861520,
+    available: false,
+    tagline:
+      "The penguin is back — this time it's not about flying, it's about revenge on that wall.",
+    instructions:
+      "Slide down the ramp, launch, and tilt for distance. Cash buys better sleds, gliders, and rockets — smash the ice wall in as few days as possible.",
+    controls: [
+      { action: "Tilt flight", keys: ["LEFT", "RIGHT"] },
+      { action: "Boost", keys: ["SPACE"] },
+    ],
+    toggles: [],
+    credit: "light_bringer777 — cartridge not bundled",
   },
   {
     id: "galagian",

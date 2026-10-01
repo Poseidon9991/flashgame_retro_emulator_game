@@ -11,42 +11,52 @@ import { useI18n } from "../../i18n/index.js";
  *
  * apiRef is populated with { restart, toggleFullscreen } for the controls bar.
  */
-export default function RufflePlayer({ game, apiRef, onRandom }) {
+export default function RufflePlayer({ game, apiRef, onRandom, onStatusChange }) {
   const { t } = useI18n();
   const hostRef = useRef(null);
   const playerElRef = useRef(null);
+  const fileRef = useRef(null);
+  // Visitor-supplied cartridge: a picked .swf becomes a blob URL and boots the
+  // same pipeline — the file never leaves their browser.
+  const [localSwf, setLocalSwf] = useState(null);
   const [status, setStatus] = useState(game.available ? "boot" : "error");
   const [errorKind, setErrorKind] = useState(game.available ? null : "cartridge");
   const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
-    if (!game.available) return; // cartridge panel is a pure render state
+    const src = localSwf?.url ?? swfUrl(game);
+    const isLocal = src.startsWith("blob:");
 
     let cancelled = false;
     const host = hostRef.current;
-    setStatus("boot");
-    setErrorKind(null);
 
     async function start() {
       try {
+        // Ruffle's load() doesn't reject on an HTTP miss — it renders its own
+        // error inside the shadow root — so every cartridge is preflighted
+        // here (blob: cartridges are already local and skip the probe). This
+        // doubles as auto-detect for dark cabinets: the moment a matching
+        // games/<id>.swf lands in public/, the cabinet lights itself.
+        if (!isLocal) {
+          const res = await fetch(src, { cache: "force-cache" });
+          const html =
+            res.headers.get("content-type")?.includes("text/html") ?? false;
+          // Dev servers answer SPA fallback HTML with a 200 — that's a miss too.
+          if (!res.ok || html) throw new Error(`swf-http-${res.status}`);
+        }
+        if (cancelled) return;
         if (!webAssemblySupported()) {
           throw new Error("wasm");
         }
         const ruffle = await loadRuffle();
         if (cancelled) return;
 
+        setStatus("boot");
+        setErrorKind(null);
+
         const player = ruffle.createPlayer();
         playerElRef.current = player;
         host.replaceChildren(player);
-
-        // Ruffle's load() doesn't reject on an HTTP miss — it renders its own
-        // error inside the shadow root — so we preflight the URL ourselves to
-        // keep the friendly panel in charge of every failure state.
-        const loadSwf = async (p) => {
-          const res = await fetch(swfUrl(game), { cache: "force-cache" });
-          if (!res.ok) throw new Error(`swf-http-${res.status}`);
-          await p.load(swfUrl(game));
-        };
 
         apiRef.current = {
           restart: async () => {
@@ -54,7 +64,7 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
             if (!p) return;
             setStatus("loading");
             try {
-              await loadSwf(p);
+              await p.load(src);
               setStatus("ready");
               p.focus?.();
             } catch {
@@ -78,7 +88,7 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
         };
 
         setStatus("loading");
-        await loadSwf(player);
+        await player.load(src);
         if (cancelled) return;
         setStatus("ready");
         player.focus?.();
@@ -87,6 +97,8 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
         setStatus("error");
         if (err?.message === "wasm") setErrorKind("wasm");
         else if (err?.message === "ruffle-cdn" || err?.message === "ruffle-no-api") setErrorKind("cdn");
+        else if (err?.message?.startsWith("swf-http"))
+          setErrorKind(game.available || isLocal ? "swf" : "cartridge");
         else setErrorKind("swf");
       }
     }
@@ -100,14 +112,40 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
       host?.replaceChildren();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [game.id, retryKey]);
+  }, [game.id, retryKey, localSwf]);
 
   const retry = () => setRetryKey((k) => k + 1);
+
+  // ControlsBar cares whether a cartridge (bundled or visitor-supplied) is live.
+  useEffect(() => {
+    onStatusChange?.(status);
+  }, [status, onStatusChange]);
+
+  const pickCartridge = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (localSwf) URL.revokeObjectURL(localSwf.url);
+    setLocalSwf({ url: URL.createObjectURL(file), name: file.name });
+  };
+
+  // Blob URLs live only as long as the component needs them.
+  useEffect(() => () => localSwf && URL.revokeObjectURL(localSwf.url), [localSwf]);
 
   return (
     <>
       {/* The emulator mounts here imperatively */}
-      {game.available && <div ref={hostRef} className="player-host" />}
+      <div ref={hostRef} className="player-host" />
+
+      <input
+        ref={fileRef}
+        type="file"
+        accept=".swf,application/x-shockwave-flash"
+        className="hidden"
+        aria-hidden="true"
+        tabIndex={-1}
+        onChange={pickCartridge}
+      />
 
       {(status === "boot" || status === "loading") && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-5 bg-[#06060a]">
@@ -116,7 +154,9 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
             <span className="blink">_</span>
           </p>
           <div className="load-bar" aria-hidden="true" />
-          <p className="font-mono text-[11px] text-mist/70">{swfUrl(game)}</p>
+          <p className="font-mono text-[11px] text-mist/70">
+            {localSwf?.name ?? swfUrl(game)}
+          </p>
         </div>
       )}
 
@@ -140,6 +180,27 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
                 </code>{" "}
                 {t("player.panel.cartridgeP3")}
               </p>
+              <p className="text-xs leading-relaxed text-mist/80">
+                {t("player.panel.archiveHint")}{" "}
+                <a
+                  href="https://archive.org/details/softwarelibrary_flash_games"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-p2 underline decoration-edge-2 underline-offset-4 hover:decoration-p2"
+                >
+                  Internet Archive
+                </a>
+                .
+              </p>
+              <button
+                type="button"
+                onClick={() => fileRef.current?.click()}
+                className="btn-coin h-10 text-sm"
+              >
+                <CartridgeIcon size={15} />
+                {t("player.panel.insertCart")}
+              </button>
+              <p className="text-[11px] text-mist/70">{t("player.panel.localNote")}</p>
             </>
           ) : errorKind === "wasm" ? (
             <>
@@ -175,6 +236,16 @@ export default function RufflePlayer({ game, apiRef, onRandom }) {
             {errorKind !== "cartridge" && errorKind !== "wasm" && (
               <button type="button" onClick={retry} className="btn-ghost h-10 text-sm">
                 {t("player.tryAgain")}
+              </button>
+            )}
+            {errorKind === "swf" && !game.available && (
+              <button
+                type="button"
+                onClick={() => fileRef.current?.click()}
+                className="btn-coin h-10 text-sm"
+              >
+                <CartridgeIcon size={15} />
+                {t("player.panel.insertCart")}
               </button>
             )}
             <button type="button" onClick={onRandom} className="btn-coin h-10 text-sm">

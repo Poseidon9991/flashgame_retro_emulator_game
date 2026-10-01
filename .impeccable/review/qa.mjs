@@ -33,8 +33,8 @@ async function newPage(viewport) {
   note(await page.locator("header a[aria-label*='Reaksa Arcade']").count() === 1, "logo present");
   note(await page.locator("input[type=search]").count() === 1, "search input present");
   note((await page.locator("nav[aria-label*=Filter] button").count()) === 5, "5 category chips");
-  note((await page.locator("main ul li a.cabinet").count()) === 12, "12 game cards on the floor");
-  note((await page.locator("a.cabinet-dark").count()) === 2, "2 dark cabinets");
+  note((await page.locator("main ul li a.cabinet").count()) === 21, "21 game cards on the floor");
+  note((await page.locator("a.cabinet-dark").count()) === 10, "10 dark cabinets");
   note(await page.locator("button:has-text('Random Game')").count() === 1, "random button");
   note(await page.locator("text=INSERT COIN").count() >= 1, "attract strip present");
 
@@ -49,8 +49,8 @@ async function newPage(viewport) {
   await page.locator("nav[aria-label*=Filter] button", { hasText: "Action" }).click();
   await page.waitForTimeout(300);
   const actionCount = await page.locator("main ul li a.cabinet").count();
-  note(actionCount === 8, "Action filter shows 8 tagged cards", `got ${actionCount}`);
-  note((await page.locator("text=8 of 12 cabinets showing").count()) === 1, "count line updates");
+  note(actionCount === 13, "Action filter shows 13 tagged cards", `got ${actionCount}`);
+  note((await page.locator("text=13 of 21 cabinets showing").count()) === 1, "count line updates");
 
   // Search with active filter → empty state
   await page.locator("input[type=search]").fill("zzzz");
@@ -58,7 +58,7 @@ async function newPage(viewport) {
   note((await page.locator("text=NO CABINETS MATCH").count()) === 1, "empty state on no match");
   await page.locator("button:has-text('Clear filters')").click();
   await page.waitForTimeout(300);
-  note((await page.locator("main ul li a.cabinet").count()) === 12, "clear filters restores 12");
+  note((await page.locator("main ul li a.cabinet").count()) === 21, "clear filters restores 21");
 
   // Search matches tagline text (mario → squario2)
   await page.locator("input[type=search]").fill("mario");
@@ -202,7 +202,7 @@ async function newPage(viewport) {
   const hash = page.url().split("#")[1] ?? "";
   note(/^\/game\/[a-z0-9-]+$/.test(hash), "random lands on a game route", hash);
   const game = hash.replace("/game/", "");
-  const known = ["galagian","asteroidase","slimower","kulkis","weirdtris","rockrush","squario2","galaxus","trapdoorer"];
+  const known = ["galagian","asteroidase","slimower","kulkis","weirdtris","rockrush","squario2","galaxus","trapdoorer","kof-wing","kof-vs-dnf"];
   note(known.includes(game), "random picked a lit cabinet", game);
   await ctx.close();
 }

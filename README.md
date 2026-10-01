@@ -35,7 +35,12 @@ Routes are hash-based: `#/` is the floor, `#/game/<id>` is a cabinet.
   preflights the `.swf` URL itself (Ruffle doesn't reject on HTTP misses), so
   every failure lands on a friendly panel: WASM blocked, CDN unreachable,
   cartridge missing, or cartridge won't load. Each panel offers retry or a
-  random-game escape.
+  random-game escape. The same preflight doubles as auto-detect for dark
+  cabinets — drop a matching `games/<id>.swf` into `public/` and the cabinet
+  lights itself on next load, no flag flip needed.
+- **Bring your own cartridge** — dark cabinets offer an "insert your own
+  .swf" picker: the visitor's file boots through a `blob:` URL entirely in
+  their browser. Nothing is uploaded, nothing is stored.
 - **Controls bar** — Restart (re-loads the SWF), Fullscreen, Theater mode.
 - **Thumbnails** (`src/components/sprites.js` + `PixelThumb.jsx`) —
   hand-authored 24×18 pixel-art plates per game, drawn as crisp SVG rects.
@@ -45,13 +50,13 @@ Routes are hash-based: `#/` is the floor, `#/game/<id>` is a cabinet.
 
 ## The cartridges
 
-Ten playable `.swf` files live in `public/games/`. Nine are pulled from
+Eleven playable `.swf` files live in `public/games/`. Nine are pulled from
 [EvidentlyCube/LegacyGames](https://github.com/EvidentlyCube/LegacyGames) —
 Aleksander "Cage" Kowalczyk's own public archive of the freeware games he
 released through Retrocade.net. Each game's folder in that repo carries its
-readme, source code, and the author's notes. The tenth, *The King of Fighters
-Wing* (v1.8, AS2), is FlashWing's freeware build — supply your own copy as
-`kof-wing.swf`.
+readme, source code, and the author's notes. The two FlashWing cartridges —
+*The King of Fighters Wing* (v1.8) and *The King of Fighters vs DNF* — are
+freeware fan builds supplied by the maintainer.
 
 | Cabinet | Source folder in LegacyGames |
 |---|---|
@@ -65,11 +70,20 @@ Wing* (v1.8, AS2), is FlashWing's freeware build — supply your own copy as
 | Galaxus | `Games/2011-09-28-Galaxus` |
 | Trapdoorer | `Games/2009-11-01-Trapdoorer` |
 
-Two era classics — *Super Smash Flash* and *Stick War* — still ship **dark**:
-their SWFs aren't bundled, so their cabinets display a "no cartridge" panel
-instead of pretending to play. To light one up, drop its `.swf` into
-`public/games/<id>.swf` and flip `available: false → true` in
-`src/data/games.js`.
+Ten era classics ship **dark** — *Super Smash Flash*, *Stick War*, *Fancy
+Pants Adventure: World 2*, *Age of War*, *Happy Wheels*, *Raze 2*, *Electric
+Man 2*, *Bloxorz*, *The Impossible Quiz*, and *Learn to Fly 2*. Their SWFs
+aren't bundled, so those cabinets display a "no cartridge" panel that gives
+visitors two ways in:
+
+- **Maintainer path** — drop the `.swf` into `public/games/<id>.swf` and
+  reload; the preflight probe finds it and the cabinet plays. Also flip
+  `available: false → true` in `src/data/games.js` so its floor card lights.
+- **Visitor path** — pick the file through the "insert your own .swf" button
+  on the panel and it plays immediately, client-side only.
+
+The panel also links to the Internet Archive's Flash library, where most of
+these cartridges are preserved.
 
 ## Adding a game
 

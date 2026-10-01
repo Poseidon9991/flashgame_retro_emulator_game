@@ -67,6 +67,9 @@ export default {
       cartridgeP2:
         "។ Reaksa Arcade មានតែហ្គេមដែលមានអាជ្ញាប័ណ្ណបើកទូលាយ ឬហ្គេមដែលអ្នកដាក់ខ្លួនឯង — ដាក់កាតរីតរបស់វាទៅក្នុង",
       cartridgeP3: "រួច reload ដើម្បីបើកវា។",
+      archiveHint: "ត្រូវការកាតរីត? ហ្គេម Flash ដែលបានរក្សាទុកមាននៅលើ",
+      insertCart: "ដាក់ .swf របស់អ្នក",
+      localNote: "ដំណើរការក្នុង browser របស់អ្នក — គ្មានអ្វីត្រូវបាន upload ទេ។",
       wasmTitle: "WEBASSEMBLY ត្រូវបានបិទ",
       wasmBody:
         "កម្មវិធី Ruffle ត្រូវការ WebAssembly ប៉ុន្តែ browser នេះបានបិទវា។ បើកវាក្នុងការកំណត់ browser រួច reload ទំព័រដើម្បីលេង។",

@@ -67,6 +67,9 @@ export default {
       cartridgeP2:
         ". Reaksa Arcade only bundles openly-licensed or owner-supplied games — this one stays dark until you drop its cartridge into",
       cartridgeP3: "and reload.",
+      archiveHint: "Need the cartridge? Preserved Flash games live on the",
+      insertCart: "Insert your own .swf",
+      localNote: "Runs locally in your browser — nothing is uploaded.",
       wasmTitle: "WEBASSEMBLY IS OFF",
       wasmBody:
         "The Ruffle emulator needs WebAssembly, and this browser has it disabled or blocked. Turn it on in your browser settings and reload the page to play.",

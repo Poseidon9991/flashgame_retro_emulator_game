@@ -15,6 +15,7 @@ function categoryColor(id) {
 export default function PlayerView({ game, onRandom }) {
   const { t } = useI18n();
   const [theater, setTheater] = useState(false);
+  const [playerStatus, setPlayerStatus] = useState(null);
   const apiRef = useRef(null);
 
   useEffect(() => {
@@ -52,13 +53,18 @@ export default function PlayerView({ game, onRandom }) {
       <div className={`stage ${theater ? "stage-theater" : ""}`}>
         <div className="bezel">
           <div key={game.id} className="bezel-screen crt-scanlines crt-on">
-            <RufflePlayer game={game} apiRef={apiRef} onRandom={onRandom} />
+            <RufflePlayer
+              game={game}
+              apiRef={apiRef}
+              onRandom={onRandom}
+              onStatusChange={setPlayerStatus}
+            />
           </div>
           <ControlsBar
             apiRef={apiRef}
             theater={theater}
             onTheater={() => setTheater((t) => !t)}
-            disabled={!game.available}
+            disabled={playerStatus === null || playerStatus === "error"}
           />
         </div>
       </div>

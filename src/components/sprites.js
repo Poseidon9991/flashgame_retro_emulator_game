@@ -43,6 +43,319 @@ export const SPRITES = {
     ],
   },
 
+  "kof-vs-dnf": {
+    w: 24,
+    h: 18,
+    bg: "#0e1a12",
+    palette: {
+      t: "#1c3a24", // jungle canopy
+      T: "#2a5233", // canopy light
+      k: "#1a1a26", // hero hair + trousers
+      s: "#f4c9a0", // skin
+      W: "#e8e8f2", // Kyo's white gi
+      g: "#3fa96b", // gremlin shade
+      G: "#6ee7a0", // gremlin body
+      y: "#ffc53d", // ki spark
+      F: "#4a3524", // floor edge
+      f: "#2e2016", // floor
+    },
+    rows: [
+      "........................",
+      "........................",
+      "........................",
+      "tttttttttttttttttttttttt",
+      "TtTtTtTtTtTtTtTtTtTtTtTt",
+      "tttttttttttttttttttttttt",
+      "....kk.........gg...gg..",
+      "....ss........gGGg..gGGg",
+      "...kWWk.......gGGg..gGGg",
+      "...WWWk..y...ggggg..gggg",
+      "...W.WW......g..g..g..g.",
+      "........................",
+      "FFFFFFFFFFFFFFFFFFFFFFFF",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+    ],
+  },
+
+  "fancy-pants-2": {
+    w: 24,
+    h: 18,
+    bg: "#1b2a44",
+    palette: {
+      w: "#e9f2fd", // clouds
+      y: "#ffc53d", // sun
+      s: "#f4c9a0", // skin + hair spikes
+      r: "#ff9f43", // the orange pants
+      g: "#3fa96b", // grass
+      G: "#2b7a4c", // hill shade
+    },
+    rows: [
+      "..............yyyy......",
+      ".............yyyyyy.....",
+      "..ww..........yyyy..www.",
+      ".wwww...............wwww",
+      "........................",
+      "......ss................",
+      ".....ssss...............", // spiky hair
+      ".....ssss...............", // head
+      "......rr................", // pants
+      ".....rrrr...............", // running torso
+      "....rr..r...............", // legs mid-stride
+      "...r.....r..............",
+      "........................",
+      "gggggggggggggggggggggggg",
+      "gggggggggggggggggggggggg",
+      "GGGGGGGGGGGGGGGGGGGGGGGG",
+      "GGGGGGGGGGGGGGGGGGGGGGGG",
+      "GGGGGGGGGGGGGGGGGGGGGGGG",
+    ],
+  },
+
+  "age-of-war": {
+    w: 24,
+    h: 18,
+    bg: "#171224",
+    palette: {
+      y: "#ffc53d", // sun
+      c: "#6b5b45", // cave silhouette
+      C: "#4a3d2c", // cave shade
+      w: "#e8e8f2", // marching units
+      t: "#3a3a4e", // future tower
+      T: "#4a4a63", // tower light
+      F: "#37304a", // ground edge
+      f: "#241f33", // ground
+    },
+    rows: [
+      "........................",
+      ".............y..........",
+      "........................",
+      "..cc..................tt",
+      ".cccc.................tt",
+      ".ccCCC..............ttTT",
+      "ccCCCCC......w......ttTT",
+      "ccCCCCC..w...w..w...ttTT",
+      "ccCCCCC..w...w..w.w.ttTT",
+      "cCCCCCCC.w...w..w.w.ttTT",
+      "cCCCCCCC........w...ttTT",
+      "........................",
+      "FFFFFFFFFFFFFFFFFFFFFFFF",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+    ],
+  },
+
+  "happy-wheels": {
+    w: 24,
+    h: 18,
+    bg: "#101726",
+    palette: {
+      s: "#f4c9a0", // rider skin
+      w: "#e8e8f2", // rider body + chair
+      R: "#4a4a63", // ramp surface
+      r: "#3a3a4e", // ramp body
+      a: "#9aa0b5", // spikes
+      F: "#2a2e44", // floor edge
+      f: "#1c1f2e", // floor
+    },
+    rows: [
+      "........................",
+      "........................",
+      "........................",
+      ".....ss.................",
+      "....swws................",
+      "....www.................",
+      "...ww.ww................",
+      "..RRR...................",
+      "...RRRR.................",
+      "....RRRRR...............",
+      ".....RRRRRR.............",
+      "......RRRRRRR.a.a.a.a...",
+      ".......RRRRRRRa.a.a.a...",
+      "FFFFFFFFFFFFaFaFaFaFaFFF",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+    ],
+  },
+
+  "raze-2": {
+    w: 24,
+    h: 18,
+    bg: "#0d1420",
+    palette: {
+      s: "#8f86c9", // stars
+      w: "#e8e8f2", // soldier armor
+      g: "#9aa0b5", // rifle
+      y: "#ffc53d", // muzzle flash
+      v: "#b36bff", // alien
+      V: "#7a4fc0", // alien shade
+      m: "#3a3a4e", // platforms
+      M: "#26262f", // platform underside
+    },
+    rows: [
+      "..s.....s......s.....s..",
+      "........................",
+      "........................",
+      "........................",
+      "..................vv....",
+      "....ww............vVv...",
+      "...w ww..g.......vvvv...",
+      "...wwww..gy.......v.....",
+      "....ww............v.....",
+      "...w..w...........vv....",
+      "..w....w........mmvmmm..",
+      "................MMMMMMM.",
+      "mmmmmmmm...........M....",
+      "MMMMMMMMM...............",
+      "........................",
+      "........................",
+      "........................",
+      "........................",
+    ],
+  },
+
+  "electric-man-2": {
+    w: 24,
+    h: 18,
+    bg: "#14141f",
+    palette: {
+      w: "#e8e8f2", // stickman
+      e: "#4fc3f7", // electric arcs
+      E: "#8fdcff", // arc highlights
+      F: "#34344c", // floor edge
+      f: "#23232f", // floor
+    },
+    rows: [
+      "........................",
+      "........................",
+      "........................",
+      ".....e..................",
+      "....e.e..........e......",
+      "......www.......e.e.....",
+      "....e.w.w.e....e.e......",
+      ".....www.e......e.......",
+      "....e.www.............e.",
+      "......w.w............e..",
+      "......w...w..........e..",
+      ".....w.....w............",
+      "........................",
+      "FFFFFFFFFFFFFFFFFFFFFFFF",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+      "ffffffffffffffffffffffff",
+    ],
+  },
+
+  "bloxorz": {
+    w: 24,
+    h: 18,
+    bg: "#0e1420",
+    palette: {
+      s: "#8f86c9", // stars
+      b: "#ffc53d", // block
+      B: "#d99a06", // block shade
+      t: "#2a2a3a", // tile light
+      T: "#1e1e2c", // tile dark
+    },
+    rows: [
+      "..s.....s......s.....s..",
+      "........................",
+      "..........bb............",
+      "..........bB............",
+      "..........bB............",
+      "..........bB............",
+      "..........bb............",
+      "..........bb............",
+      "........................",
+      "...tTtTtTtTtTtTtTtTtT...",
+      "...TtTtTtTtTtTtTtTtTt...",
+      "...tTtTtTtTtTtTtTtTtT...",
+      "...TtTtTtTtTtTtTtTtTt...",
+      "...tTtTtTtTtTtTtTtTtT...",
+      "........................",
+      "........................",
+      "........................",
+      "........................",
+    ],
+  },
+
+  "impossible-quiz": {
+    w: 24,
+    h: 18,
+    bg: "#181020",
+    palette: {
+      b: "#2a1e3d", // panel
+      B: "#4a3570", // panel border
+      w: "#f4f4fa", // question mark
+      y: "#ffc53d", // wrong-answer ticks
+      r: "#ff5a5f", // wrong cross
+    },
+    rows: [
+      "..BBBBBBBBBBBBBBBBBBBB..",
+      "..B..................B..",
+      "..B....wwww...........B.",
+      "..B...w....w..........B.",
+      "..B........w..........B.",
+      "..B.......w...........B.",
+      "..B.......w...........B.",
+      "..B...................B.",
+      "..B.......w...........B.",
+      "..B...................B.",
+      "..B...................B.",
+      "..B..y....y....y...y..B.",
+      "..BBBBBBBBBBBBBBBBBBBBB.",
+      "....r...............r...",
+      "...r.r.............r.r..",
+      "....r...............r...",
+      "...r.r.............r.r..",
+      "........................",
+    ],
+  },
+
+  "learn-to-fly-2": {
+    w: 24,
+    h: 18,
+    bg: "#1b2a44",
+    palette: {
+      w: "#e9f2fd", // clouds
+      p: "#23232f", // penguin
+      P: "#f4f4fa", // belly
+      y: "#ffc53d", // beak
+      i: "#bcd9f5", // ice ramp
+      I: "#8fb8e0", // ramp shade
+      s: "#f4f4fa", // snow floor
+    },
+    rows: [
+      "....www.................",
+      "...wwwww.........www....",
+      "........................",
+      "...pp...................",
+      "...pPp..................",
+      "..pPyPp.................",
+      "..pPPp.....i............",
+      "...pp.....iii...........",
+      "..........iiiii.........",
+      ".........iiiiiii........",
+      "........iiiiiiiii.......",
+      ".......IIIIIIIIIII......",
+      "ssssssssssssssssssssssss",
+      "ssssssssssssssssssssssss",
+      "ssssssssssssssssssssssss",
+      "ssssssssssssssssssssssss",
+      "ssssssssssssssssssssssss",
+      "ssssssssssssssssssssssss",
+    ],
+  },
+
   "super-smash-flash": {
     w: 24,
     h: 18,
