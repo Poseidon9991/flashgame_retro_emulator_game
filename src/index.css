@@ -1,0 +1,401 @@
+@import "tailwindcss";
+
+@theme {
+  /* The arcade hall at night */
+  --color-void: #0c0c13;
+  --color-hall: #101019;
+  --color-chassis: #15151f;
+  --color-chassis-2: #1d1d2a;
+  --color-edge: #262636;
+  --color-edge-2: #34344c;
+  /* Coin gold — the one big action color */
+  --color-coin: #ffc53d;
+  --color-coin-deep: #9a6d00;
+  /* Arcade category palette (functional coding only) */
+  --color-ember: #ff9f43;
+  --color-p1: #ff5a5f;
+  --color-p2: #4fc3f7;
+  --color-phosphor: #7cfc9a;
+  --color-ink: #f4f4fa;
+  --color-mist: #a3a3b8;
+
+  --font-display: "Press Start 2P", "Courier New", monospace;
+  --font-ui: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --font-km: "Kantumruy Pro", "Hanuman", "Segoe UI", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scrollbar-color: var(--color-edge-2) var(--color-void);
+  }
+
+  body {
+    background-color: var(--color-void);
+    background-image: radial-gradient(1100px 520px at 50% -120px, #17162a 0%, transparent 65%);
+    background-repeat: no-repeat;
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgb(255 197 61 / 0.38);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-coin);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-edge-2);
+    border: 3px solid var(--color-void);
+    border-radius: 8px;
+  }
+
+  /* Khmer locale: Kantumruy Pro covers Khmer script. */
+  :root[lang="km"] {
+    --font-ui: var(--font-km);
+  }
+}
+
+@layer components {
+  /* Pixel display voice */
+  .pixel {
+    font-family: var(--font-display);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+
+  /* Press Start 2P has no Khmer glyphs — km mode swaps the display voice for
+     a clean bold Khmer face (same layer, higher specificity than .pixel). */
+  :root[lang="km"] .pixel {
+    font-family: var(--font-km);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.75;
+  }
+
+  /* Coin-insert button */
+  .btn-coin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-coin-deep);
+    border-bottom-width: 3px;
+    background: var(--color-coin);
+    color: #221500;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: filter 140ms ease, transform 100ms ease;
+  }
+  .btn-coin:hover {
+    filter: brightness(1.09);
+  }
+  .btn-coin:active {
+    transform: translateY(2px);
+    filter: brightness(0.98);
+  }
+
+  /* Chassis button */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-edge-2);
+    border-bottom-width: 3px;
+    background: var(--color-chassis-2);
+    color: var(--color-ink);
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: filter 140ms ease, transform 100ms ease;
+  }
+  .btn-ghost:hover {
+    filter: brightness(1.18);
+  }
+  .btn-ghost:active {
+    transform: translateY(2px);
+  }
+
+  /* Category filter chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 36px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-edge-2);
+    background: var(--color-chassis);
+    color: var(--color-mist);
+    font-weight: 600;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 140ms ease, border-color 140ms ease, background-color 140ms ease;
+  }
+  .chip:hover {
+    color: var(--color-ink);
+    border-color: color-mix(in srgb, var(--chip-color) 60%, var(--color-edge-2));
+  }
+  .chip[aria-pressed="true"] {
+    color: var(--chip-color);
+    border-color: color-mix(in srgb, var(--chip-color) 70%, transparent);
+    background: color-mix(in srgb, var(--chip-color) 14%, var(--color-chassis));
+  }
+  .chip .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--chip-color, var(--color-edge-2));
+    box-shadow: 0 0 6px color-mix(in srgb, var(--chip-color) 60%, transparent);
+  }
+
+  /* Category tag on cards */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.14rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--tag-color);
+    border: 1px solid color-mix(in srgb, var(--tag-color) 55%, transparent);
+    background: color-mix(in srgb, var(--tag-color) 13%, transparent);
+  }
+
+  /* Keyboard keycap */
+  .keycap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 2.2rem;
+    height: 2.2rem;
+    padding: 0 0.55rem;
+    border-radius: 7px;
+    background: var(--color-chassis-2);
+    border: 1px solid var(--color-edge-2);
+    border-bottom-width: 3px;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+    font-family: var(--font-display);
+    font-size: 0.56rem;
+    color: var(--color-ink);
+  }
+  .keycap-sm {
+    min-width: 1.6rem;
+    height: 1.6rem;
+    padding: 0 0.4rem;
+    font-size: 0.5rem;
+    border-bottom-width: 2px;
+    border-radius: 5px;
+  }
+
+  /* Game card — a cabinet with a backlit marquee */
+  .cabinet {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: 1px solid var(--color-edge);
+    background: var(--color-chassis);
+    overflow: hidden;
+    transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .cabinet:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-edge-2);
+    box-shadow: 0 18px 40px -22px rgb(0 0 0 / 0.85);
+  }
+  .cabinet .plate {
+    position: relative;
+    transition: filter 160ms ease;
+  }
+  .cabinet:hover .plate,
+  .cabinet:focus-visible .plate {
+    filter: brightness(1.24) saturate(1.1);
+  }
+  .cabinet-lit .plate::after {
+    /* marquee backlight that only exists on hover */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 90% at 50% 115%, rgb(255 197 61 / 0.22), transparent 55%);
+    opacity: 0;
+    transition: opacity 160ms ease;
+    pointer-events: none;
+  }
+  .cabinet-lit:hover .plate::after,
+  .cabinet-lit:focus-visible .plate::after {
+    opacity: 1;
+  }
+  .cabinet-dark .plate {
+    filter: brightness(0.42) saturate(0.55);
+  }
+  .cabinet-dark:hover .plate,
+  .cabinet-dark:focus-visible .plate {
+    filter: brightness(0.6) saturate(0.7);
+  }
+
+  /* The CRT */
+  .bezel {
+    background: linear-gradient(180deg, var(--color-chassis-2), var(--color-chassis) 30%);
+    border: 1px solid var(--color-edge-2);
+    border-radius: 16px;
+    padding: clamp(10px, 1.6vw, 18px);
+    box-shadow:
+      0 30px 70px -34px rgb(0 0 0 / 0.95),
+      inset 0 1px 0 rgb(255 255 255 / 0.045);
+  }
+  .bezel-screen {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    background: #06060a;
+    border: 1px solid #04040a;
+    box-shadow:
+      inset 0 0 0 2px #020205,
+      inset 0 0 42px rgb(0 0 0 / 0.85);
+    overflow: hidden;
+  }
+  .bezel-screen ruffle-player,
+  .bezel-screen .player-host {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .crt-scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgb(3 5 10 / 0.26) 2px 4px
+    );
+  }
+  .crt-on {
+    transform-origin: 50% 50%;
+    animation: crt-on 520ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  }
+
+  .blink {
+    animation: blink 1.25s steps(1, end) infinite;
+  }
+
+  /* Indeterminate cartridge-read bar */
+  .load-bar {
+    position: relative;
+    height: 8px;
+    width: 190px;
+    border-radius: 4px;
+    background: var(--color-chassis-2);
+    border: 1px solid var(--color-edge);
+    overflow: hidden;
+  }
+  .load-bar::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    width: 34%;
+    border-radius: 2px;
+    background: var(--color-coin);
+    animation: load-sweep 1.15s ease-in-out infinite alternate;
+  }
+
+  .stage {
+    max-width: 54rem;
+    margin-inline: auto;
+  }
+  .stage-theater {
+    max-width: min(96vw, 74rem);
+  }
+
+  .panel {
+    background: var(--color-chassis);
+    border: 1px solid var(--color-edge);
+    border-radius: 12px;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-on {
+  0% {
+    transform: scaleY(0.004);
+    filter: brightness(5) saturate(0);
+  }
+  38% {
+    transform: scaleY(0.018);
+    filter: brightness(6) saturate(0.4);
+  }
+  62% {
+    transform: scaleY(1);
+    filter: brightness(2.1);
+  }
+  82% {
+    filter: brightness(0.8);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+@keyframes load-sweep {
+  from {
+    transform: translateX(-12%);
+  }
+  to {
+    transform: translateX(195%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blink,
+  .crt-on,
+  .load-bar::after {
+    animation: none;
+  }
+  .cabinet,
+  .cabinet .plate,
+  .stage,
+  .btn-coin,
+  .btn-ghost,
+  .chip {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
