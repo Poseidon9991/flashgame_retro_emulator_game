@@ -17,6 +17,25 @@ export const CATEGORIES = [
 ];
 
 export const GAMES = [
+
+
+
+  {
+    id: "pvz2-gardendless",
+    title: "Plants vs Zombies 2 Gardendless",
+    year: 2023,
+    author: "PopCap & Fan-made HTML5",
+    category: "Strategy",
+    tags: ["Strategy", "Action"],
+    plays: 68333,
+    available: true,
+    iframeUrl: "https://en.gameslol.net/data/pvzge/index.html",
+    tagline: "A fan-made tower defense game where you protect your garden from zombies, running natively in HTML5.",
+    instructions: "Place your plants across the lawn to stop the zombies, with each one having its own unique ability.",
+    controls: [{ action: "All actions", mouse: true }],
+    toggles: [],
+    credit: "Fan-made HTML5 port via GamesLOL",
+  },
   {
     id: "kof-wing",
     title: "The King of Fighters Wing",
@@ -70,7 +89,7 @@ export const GAMES = [
     category: "Fighting",
     tags: ["Fighting", "Action"],
     plays: 6188422,
-    available: false,
+    available: true,
     tagline:
       "Cleod9's legendary browser Smash clone — knock opponents off the stage before they knock you off.",
     instructions:
@@ -92,7 +111,7 @@ export const GAMES = [
     category: "Classics",
     tags: ["Classics", "Action"],
     plays: 5941701,
-    available: false,
+    available: true,
     tagline:
       "Command a stick-figure nation: mine gold, raise an army of swordsmen, spearmen and mages, and topple the enemy statue.",
     instructions:
@@ -113,7 +132,7 @@ export const GAMES = [
     category: "Classics",
     tags: ["Classics", "Action"],
     plays: 4520963,
-    available: false,
+    available: true,
     tagline:
       "The hand-drawn platformer with the orange pants — momentum runs, loop slides, and snail-shell golf.",
     instructions:
@@ -134,7 +153,7 @@ export const GAMES = [
     category: "Classics",
     tags: ["Classics", "Action"],
     plays: 6934208,
-    available: false,
+    available: true,
     tagline:
       "The base-defense legend — evolve from cavemen throwing rocks to future tanks, and flatten the other cave.",
     instructions:
@@ -154,7 +173,7 @@ export const GAMES = [
     category: "Action",
     tags: ["Action"],
     plays: 9118264,
-    available: false,
+    available: true,
     tagline:
       "The physics ragdoll gauntlet — wheelchair guy vs. spike pits, harpoons, and catastrophic level design.",
     instructions:
@@ -176,7 +195,7 @@ export const GAMES = [
     category: "Action",
     tags: ["Action"],
     plays: 5316941,
-    available: false,
+    available: true,
     tagline:
       "Arena-shooter campaign — Earth's last soldier vs. aliens, zombies, and robots across four campaigns.",
     instructions:
@@ -198,7 +217,7 @@ export const GAMES = [
     category: "Fighting",
     tags: ["Fighting"],
     plays: 3877415,
-    available: false,
+    available: true,
     tagline:
       "The stick-figure tournament with bullet-time — punch, kick, and throw in crackling slow motion.",
     instructions:
@@ -219,7 +238,7 @@ export const GAMES = [
     category: "Puzzle",
     tags: ["Puzzle", "Classics"],
     plays: 5280187,
-    available: false,
+    available: true,
     tagline:
       "Roll a 2×1 block across floating platforms — one wrong tilt and you're off the edge.",
     instructions:
@@ -236,7 +255,7 @@ export const GAMES = [
     category: "Puzzle",
     tags: ["Puzzle"],
     plays: 7403552,
-    available: false,
+    available: true,
     tagline:
       "110 questions of lateral-thinking cruelty — skips are precious, and answers are never what they seem.",
     instructions:
@@ -253,7 +272,7 @@ export const GAMES = [
     category: "Classics",
     tags: ["Classics"],
     plays: 4861520,
-    available: false,
+    available: true,
     tagline:
       "The penguin is back — this time it's not about flying, it's about revenge on that wall.",
     instructions:
@@ -498,4 +517,8 @@ export function formatPlays(plays) {
 
 export function swfUrl(game) {
   return `${import.meta.env.BASE_URL}games/${game.id}.swf`;
+}
+
+export function thumbUrl(game) {
+  return `${import.meta.env.BASE_URL}thumbnails/${game.id}.jpg`;
 }

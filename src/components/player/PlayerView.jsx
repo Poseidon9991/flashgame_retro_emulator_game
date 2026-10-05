@@ -53,18 +53,28 @@ export default function PlayerView({ game, onRandom }) {
       <div className={`stage ${theater ? "stage-theater" : ""}`}>
         <div className="bezel">
           <div key={game.id} className="bezel-screen crt-scanlines crt-on">
-            <RufflePlayer
-              game={game}
-              apiRef={apiRef}
-              onRandom={onRandom}
-              onStatusChange={setPlayerStatus}
-            />
+            {game.iframeUrl ? (
+              <iframe
+                src={game.iframeUrl}
+                title={game.title}
+                className="w-full h-full border-0"
+                allow="autoplay; fullscreen"
+                sandbox="allow-scripts allow-same-origin"
+              />
+            ) : (
+              <RufflePlayer
+                game={game}
+                apiRef={apiRef}
+                onRandom={onRandom}
+                onStatusChange={setPlayerStatus}
+              />
+            )}
           </div>
           <ControlsBar
             apiRef={apiRef}
             theater={theater}
             onTheater={() => setTheater((t) => !t)}
-            disabled={playerStatus === null || playerStatus === "error"}
+            disabled={!game.iframeUrl && (playerStatus === null || playerStatus === "error")}
           />
         </div>
       </div>

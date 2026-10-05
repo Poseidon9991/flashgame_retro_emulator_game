@@ -1,4 +1,4 @@
-import { CATEGORIES, formatPlays } from "../data/games.js";
+import { CATEGORIES, formatPlays, thumbUrl } from "../data/games.js";
 import PixelThumb from "./PixelThumb.jsx";
 import { PlayIcon } from "./Icons.jsx";
 import { useI18n } from "../i18n/index.js";
@@ -26,8 +26,21 @@ export default function GameCard({ game }) {
       }
     >
       {/* Marquee plate — a 4:3 CRT-shaped screen */}
-      <div className="plate aspect-[4/3] border-b border-edge bg-void">
-        <PixelThumb id={game.id} />
+      <div className="plate aspect-[4/3] border-b border-edge bg-void relative overflow-hidden">
+        <img 
+          src={thumbUrl(game)} 
+          alt={game.title}
+          className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            e.target.style.display = 'none';
+            if (e.target.nextElementSibling) {
+              e.target.nextElementSibling.style.display = 'block';
+            }
+          }}
+        />
+        <div style={{ display: 'none' }} className="absolute inset-0">
+          <PixelThumb id={game.id} />
+        </div>
 
         {game.available ? (
           <span className="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100">

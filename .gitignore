@@ -3,3 +3,6 @@ dist/
 .impeccable/review/node_modules/
 .impeccable/review/package*.json
 *.local
+*.exe
+ddg_test.jpg
+test_img.jpg
